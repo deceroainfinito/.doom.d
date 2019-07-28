@@ -61,3 +61,6 @@
 
   :config
   (load-theme 'doom-peacock t))
+
+;; Maximize on startup
+(set-frame-parameter (selected-frame) 'fullscreen 'fullboth)
