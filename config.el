@@ -8,6 +8,9 @@
 
  +doom-dashboard-banner-file (expand-file-name "red_dice_logo.png" doom-private-dir)
 
+ doom-font (font-spec :family "Fira Code" :size 22)
+ doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18)
+
  )
 
 (def-package! org-super-agenda
