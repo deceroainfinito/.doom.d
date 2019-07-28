@@ -17,6 +17,14 @@
       :ne "M-+" #'text-scale-increase
       :ne "M--" #'text-scale-decrease)
 
+;; M spanish keyboard symbols doesn't work so well with workspaces feature
+;; !!!! M stands for 'alt' key
+(map! :ie "M-1" (λ! (interactive) (insert "|")))
+(map! :ie "M-2" (λ! (interactive) (insert "@")))
+(map! :ie "M-3" (λ! (interactive) (insert "#")))
+
+
+
 (def-package! org-super-agenda
   :after org-agenda
   ;; before the package is loaded
