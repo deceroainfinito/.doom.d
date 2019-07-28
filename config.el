@@ -13,6 +13,10 @@
 
  )
 
+(map! :ne "M-=" (λ! (text-scale-set 0))
+      :ne "M-+" #'text-scale-increase
+      :ne "M--" #'text-scale-decrease)
+
 (def-package! org-super-agenda
   :after org-agenda
   ;; before the package is loaded
