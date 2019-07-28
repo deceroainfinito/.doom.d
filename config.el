@@ -2,6 +2,13 @@
 
 ;; Place your private configuration here
 ;; (setq doom-font (font-spec :family "Source Code" :size 20) doom-big-font (font-spec :family "Source Code" :size 36))
+;;
+
+(setq
+
+ +doom-dashboard-banner-file (expand-file-name "red_dice_logo.png" doom-private-dir)
+
+ )
 
 (def-package! org-super-agenda
   :after org-agenda
