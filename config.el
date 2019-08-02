@@ -24,6 +24,7 @@
 
 ;; M spanish keyboard symbols doesn't work so well with workspaces feature
 ;; !!!! M stands for 'alt' key
+(map! :g "M-º" (λ! (interactive) (insert "\\")))
 (map! :ie "M-1" (λ! (interactive) (insert "|")))
 (map! :ie "M-2" (λ! (interactive) (insert "@")))
 (map! :ie "M-3" (λ! (interactive) (insert "#")))
