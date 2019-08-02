@@ -11,6 +11,11 @@
  doom-font (font-spec :family "Fira Code" :size 22)
  doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18)
 
+
+ org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "|" "DONE(d)")
+                     (sequence "[ ](T)" "[-](P)" "[?](M)" "|" "[X](D)")
+                     (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
+                     (sequence "[READY FOR REVIEW](W)" "[REVIEW FAILED](F)" "[READY FOR TESTING](T)" "[URGENT](G)" "[TESTING FAILED](A)" "|" "[DONE](d)"))
  )
 
 (map! :ne "M-=" (λ! (text-scale-set 0))
