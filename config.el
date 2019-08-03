@@ -29,7 +29,15 @@
 (map! :ie "M-2" (λ! (interactive) (insert "@")))
 (map! :ie "M-3" (λ! (interactive) (insert "#")))
 
+(setq org-link-frame-setup '((file . find-file-other-window)))
 
+(def-package! org
+  :config
+  (setq-default org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "|" "DONE(d)")
+                                    (sequence "[!](i)")
+                                    (sequence "[ ](T)" "[-](P)" "[?](M)" "|" "[X](D)")
+                                    (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
+                                    (sequence "[READY FOR REVIEW](W)" "[REVIEW FAILED](F)" "[READY FOR TESTING](T)" "[URGENT](G)" "[TESTING FAILED](A)" "|" "[DONE](d)"))))
 
 (def-package! org-super-agenda
   :after org-agenda
