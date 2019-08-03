@@ -1,26 +1,15 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here
-;; (setq doom-font (font-spec :family "Source Code" :size 20) doom-big-font (font-spec :family "Source Code" :size 36))
-;;
-
+ ;; Font management
 (setq
-
  +doom-dashboard-banner-file (expand-file-name "red_dice_logo.png" doom-private-dir)
-
- doom-font (font-spec :family "Fira Code" :size 22)
- doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18)
-
-
- org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "|" "DONE(d)")
-                     (sequence "[ ](T)" "[-](P)" "[?](M)" "|" "[X](D)")
-                     (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
-                     (sequence "[READY FOR REVIEW](W)" "[REVIEW FAILED](F)" "[READY FOR TESTING](T)" "[URGENT](G)" "[TESTING FAILED](A)" "|" "[DONE](d)"))
- )
+ doom-font (font-spec :family "Fira Code" :size 16)
+ doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18))
 
 (map! :ne "M-=" (λ! (text-scale-set 0))
       :ne "M-+" #'text-scale-increase
       :ne "M--" #'text-scale-decrease)
+
 
 ;; M spanish keyboard symbols doesn't work so well with workspaces feature
 ;; !!!! M stands for 'alt' key
