@@ -1,15 +1,11 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here
-;; (setq doom-font (font-spec :family "Source Code" :size 20) doom-big-font (font-spec :family "Source Code" :size 36))
-;;
-
+ ;; Font management
 (setq
-
  +doom-dashboard-banner-file (expand-file-name "red_dice_logo.png" doom-private-dir)
 
- doom-font (font-spec :family "Fira Code" :size 22)
- doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18)
+ doom-font (font-spec :family "Fira Code" :size 16)
+ doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18))
 
  )
 
@@ -33,6 +29,7 @@
       :ne "M-+" #'text-scale-increase
       :ne "M--" #'text-scale-decrease)
 
+
 ;; M spanish keyboard symbols doesn't work so well with workspaces feature
 ;; !!!! M stands for 'alt' key
 (map! :g "M-º" (λ! (interactive) (insert "\\")))
@@ -40,7 +37,15 @@
 (map! :ie "M-2" (λ! (interactive) (insert "@")))
 (map! :ie "M-3" (λ! (interactive) (insert "#")))
 
+(setq org-link-frame-setup '((file . find-file-other-window)))
 
+(def-package! org
+  :config
+  (setq-default org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "|" "DONE(d)")
+                                    (sequence "[!](i)")
+                                    (sequence "[ ](T)" "[-](P)" "[?](M)" "|" "[X](D)")
+                                    (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
+                                    (sequence "[READY FOR REVIEW](W)" "[REVIEW FAILED](F)" "[READY FOR TESTING](T)" "[URGENT](G)" "[TESTING FAILED](A)" "|" "[DONE](d)"))))
 
 (def-package! org-super-agenda
   :after org-agenda
