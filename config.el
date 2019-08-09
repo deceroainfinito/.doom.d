@@ -7,19 +7,6 @@
  doom-font (font-spec :family "Fira Code" :size 16)
  doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18))
 
- )
-
-(add-hook! :append org-load
-  (setq org-todo-keywords
-        '((sequence "[ READY FOR REVIEW ](r)"
-                    "[ REVIEW FAILED ](f)"
-                    "[ READY FOR TESTING ](t)"
-                    "[ READY FOR PRODUCTION ](p)"
-                    "[ TESTING FAILED ](d)"
-                    "|"
-                    "[ MERGED ](m)")
-          (sequence "[?](?)" "URGENT(y)" "HOLD(h)" "|" "[X](x)"))))
-
 ;; (setq-default org-todo-keywords '((sequence "[ ](T)" "[-](P)" "[?](M)" "|" "[X](D)")))
 ;; (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
 ;; (sequence "[RFOR REVIEW](W)" "[REVIEW FAILED](F)" "[RFOR TESTING](T)" "|" "RFOR PRODUCTION(N)")
@@ -37,15 +24,20 @@
 (map! :ie "M-2" (λ! (interactive) (insert "@")))
 (map! :ie "M-3" (λ! (interactive) (insert "#")))
 
-(setq org-link-frame-setup '((file . find-file-other-window)))
 
-(def-package! org
+(after! org
   :config
-  (setq-default org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "|" "DONE(d)")
-                                    (sequence "[!](i)")
-                                    (sequence "[ ](T)" "[-](P)" "[?](M)" "|" "[X](D)")
-                                    (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
-                                    (sequence "[READY FOR REVIEW](W)" "[REVIEW FAILED](F)" "[READY FOR TESTING](T)" "[URGENT](G)" "[TESTING FAILED](A)" "|" "[DONE](d)"))))
+  (setq org-link-frame-setup '((file . find-file-other-window)))
+  (setq org-todo-keywords '((sequence "TODO(t)" "PROJ(p)")
+                            (sequence "[!](i)" "[ ](E)" "[-](g)" "[?](Q)" "|" "[X](D)")
+                            (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
+                            (sequence "[READY FOR REVIEW](W)"
+                                      "[REVIEW FAILED](F)"
+                                      "[READY FOR TESTING](T)"
+                                      "[URGENT](G)"
+                                      "[TESTING FAILED](A)"
+                                      "|"
+                                      "[DONE](d)"))))
 
 (def-package! org-super-agenda
   :after org-agenda
