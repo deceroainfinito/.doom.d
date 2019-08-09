@@ -16,6 +16,7 @@
       :ne "M-+" #'text-scale-increase
       :ne "M--" #'text-scale-decrease)
 
+(map! :leader :g "a" #'projectile-ag)
 
 ;; M spanish keyboard symbols doesn't work so well with workspaces feature
 ;; !!!! M stands for 'alt' key
