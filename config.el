@@ -25,9 +25,6 @@
 (map! :ie "M-2" (λ! (interactive) (insert "@")))
 (map! :ie "M-3" (λ! (interactive) (insert "#")))
 
-
-(map! :g "<SPC> a" #'projectile-ag)
-
 (map! :map outline-mode-map
       :n "zw" #'widen)
 
