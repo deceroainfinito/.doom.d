@@ -24,6 +24,7 @@
 (map! :ie "M-2" (λ! (interactive) (insert "@")))
 (map! :ie "M-3" (λ! (interactive) (insert "#")))
 
+(map! :g "<SPC> a" #'projectile-ag)
 
 (after! org
   :config
@@ -36,6 +37,7 @@
                                       "[READY FOR TESTING](T)"
                                       "[URGENT](G)"
                                       "[TESTING FAILED](A)"
+                                      "[READY FOR PRODUCTION](P)"
                                       "|"
                                       "[DONE](d)"))))
 
