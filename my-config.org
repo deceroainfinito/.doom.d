@@ -4,16 +4,14 @@
 - Dashboard icon
 #+BEGIN_SRC emacs-lisp
 (setq
- +doom-dashboard-banner-file (expand-file-name "red_dice_logo.png" doom-private-dir)
-)
+ +doom-dashboard-banner-file (expand-file-name "red_dice_logo.png" doom-private-dir))
 #+END_SRC
 
 - Font Management
 #+BEGIN_SRC emacs-lisp
 (setq
  doom-font (font-spec :family "Fira Code" :size 16)
- doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18)
-)
+ doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18))
 #+END_SRC
 
 - Theming
@@ -112,9 +110,10 @@
 #+END_SRC
 
 * Other stuff
- - Copy lines matching an expression
- #+BEGIN_SRC emacs-lisp
-(defun copy-lines-matching-re (re)
+
+- Copy lines matching an expression
+  #+BEGIN_SRC emacs-lisp
+ (defun copy-lines-matching-re (re)
   "find all lines matching the regexp RE in the current buffer
 putting the matching lines in a buffer named *matching*"
   (interactive "sRegexp to match: ")
@@ -129,4 +128,29 @@ putting the matching lines in a buffer named *matching*"
                                                  (line-beginning-position 2))
                  result-buffer))))
     (pop-to-buffer result-buffer)))
+ #+END_SRC
+
+ - Remove links, keep description
+ #+BEGIN_SRC emacs-lisp
+(defun afs/org-replace-link-by-link-description ()
+  "Replace an org link by its description or if empty its address"
+  (interactive)
+  (if (org-in-regexp org-bracket-link-regexp 1)
+      (let ((remove (list (match-beginning 0) (match-end 0)))
+            (description (if (match-end 3)
+                             (org-match-string-no-properties 3)
+                           (org-match-string-no-properties 1))))
+        (apply 'delete-region remove)
+        (insert description))))
+ #+END_SRC
+
+ - Cursors changes
+ #+BEGIN_SRC emacs-lisp
+ ;; (use-package evil-terminal-cursor-changer
+ ;;   :init
+ ;;   (progn
+ ;;     (unless (display-graphic-p)
+ ;;          (require 'evil-terminal-cursor-changer)
+ ;;          (evil-terminal-cursor-changer-activate) ; or (etcc-on)
+ ;;          )))
  #+END_SRC
