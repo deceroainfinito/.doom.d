@@ -71,6 +71,7 @@
                                       "[READY FOR TESTING](T)"
                                       "[URGENT](G)"
                                       "[TESTING FAILED](A)"
+                                      "[DO NOT MERGE](N)"
                                       "[READY FOR PRODUCTION](P)"
                                       "|"
                                       "[MERGED](M)"
