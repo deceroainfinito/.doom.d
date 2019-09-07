@@ -1,20 +1,20 @@
 #+TITLE: my-config
 
 * Doom stuff
-- Dashboard icon
+** Dashboard icon
 #+BEGIN_SRC emacs-lisp
 (setq
  +doom-dashboard-banner-file (expand-file-name "red_dice_logo.png" doom-private-dir))
 #+END_SRC
 
-- Font Management
+** Font Management
 #+BEGIN_SRC emacs-lisp
 (setq
  doom-font (font-spec :family "Fira Code" :size 16)
  doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18))
 #+END_SRC
 
-- Theming
+** Theming
 #+BEGIN_SRC emacs-lisp
 (def-package! doom-themes
   :init
@@ -34,14 +34,14 @@
 #+END_SRC
 
 * Mapping
-- Font sizing
+** Font sizing
 #+BEGIN_SRC emacs-lisp
 (map! :ne "M-=" (λ! (text-scale-set 0))
       :ne "M-+" #'text-scale-increase
       :ne "M--" #'text-scale-decrease)
 #+END_SRC
 
-- ES keyboard symbols (\, |, @, #, ~)
+** ES keyboard symbols (\, |, @, #, ~)
 #+BEGIN_SRC emacs-lisp
 ;; !!!! M stands for 'alt' key
 (map! :g "M-º" (λ! (interactive) (insert "\\")))
@@ -51,20 +51,22 @@
 (map! :ie "M-ñ" (λ! (interactive) (insert "~")))
 #+END_SRC
 
-- Projetile ag to "SPC a"
+** Projetile ag to "SPC a"
 #+BEGIN_SRC emacs-lisp
 (map! :leader :g "a" #'projectile-ag)
 #+END_SRC
 
 * Org stuff
 
-- TODO keywords
+** TODO-keywords
 #+BEGIN_SRC emacs-lisp
 (after! org
+  :init
+  (add-to-list 'org-modules 'org-habit t)
   :config
   (setq org-link-frame-setup '((file . find-file-other-window)))
-  (setq org-todo-keywords '((sequence "TODO(t)" "PROJ(p)")
-                            (sequence "[!](i)" "[ ](E)" "[-](g)" "[?](Q)" "|" "[X](D)")
+  (setq org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "|" "DONE(o)")
+                            (sequence "[!](i)" "[ ](E)" "[-](g)" "[?](q)" "|" "[X](D)")
                             (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
                             (sequence "[READY FOR REVIEW](W)"
                                       "[REVIEW FAILED](F)"
@@ -72,6 +74,7 @@
                                       "[URGENT](G)"
                                       "[TESTING FAILED](A)"
                                       "[DO NOT MERGE](N)"
+                                      "[QA NOT REQUIRED](Q)"
                                       "[READY FOR PRODUCTION](P)"
                                       "|"
                                       "[MERGED](M)"
@@ -80,13 +83,13 @@
 
 #+END_SRC
 
-- Widen keybinding
+** Widen keybinding
 #+BEGIN_SRC emacs-lisp
 (map! :map outline-mode-map
       :n "zw" #'widen)
 #+END_SRC
 
-- super-agenda
+** super-agenda
 #+BEGIN_SRC emacs-lisp
 (def-package! org-super-agenda
   :after org-agenda
@@ -112,7 +115,7 @@
 
 * Other stuff
 
-- Copy lines matching an expression
+** Copy lines matching an expression
   #+BEGIN_SRC emacs-lisp
  (defun copy-lines-matching-re (re)
   "find all lines matching the regexp RE in the current buffer
@@ -131,7 +134,7 @@ putting the matching lines in a buffer named *matching*"
     (pop-to-buffer result-buffer)))
  #+END_SRC
 
- - Remove links, keep description
+** Remove links, keep description
  #+BEGIN_SRC emacs-lisp
 (defun afs/org-replace-link-by-link-description ()
   "Replace an org link by its description or if empty its address"
@@ -145,7 +148,7 @@ putting the matching lines in a buffer named *matching*"
         (insert description))))
  #+END_SRC
 
- - Cursors changes
+** Cursors changes
  #+BEGIN_SRC emacs-lisp
  ;; (use-package evil-terminal-cursor-changer
  ;;   :init

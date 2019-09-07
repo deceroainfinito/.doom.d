@@ -7,3 +7,4 @@
 ;; (package! builtin-package :disable t)
 (package! org-super-agenda)
 (package! doom-themes)
+(package! org-journal)
