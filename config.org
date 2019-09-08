@@ -1,5 +1,3 @@
-#+TITLE: my-config
-
 * Doom stuff
 ** Dashboard icon
 #+BEGIN_SRC emacs-lisp
@@ -10,7 +8,7 @@
 ** Font Management
 #+BEGIN_SRC emacs-lisp
 (setq
- doom-font (font-spec :family "Fira Code" :size 16)
+ doom-font (font-spec :family "Fira Code" :size 14)
  doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18))
 #+END_SRC
 
@@ -30,7 +28,7 @@
   (doom-themes-org-config)
 
   :config
-  (load-theme 'doom-peacock t))
+  (load-theme 'doom-nord t))
 #+END_SRC
 
 * Mapping
@@ -55,17 +53,13 @@
 #+BEGIN_SRC emacs-lisp
 (map! :leader :g "a" #'projectile-ag)
 #+END_SRC
-
 * Org stuff
-
 ** TODO-keywords
 #+BEGIN_SRC emacs-lisp
 (after! org
-  :init
-  (add-to-list 'org-modules 'org-habit t)
   :config
   (setq org-link-frame-setup '((file . find-file-other-window)))
-  (setq org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "|" "DONE(o)")
+  (setq org-todo-keywords '((sequence "TODO(t)" "|")
                             (sequence "[!](i)" "[ ](E)" "[-](g)" "[?](q)" "|" "[X](D)")
                             (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
                             (sequence "[READY FOR REVIEW](W)"
@@ -82,13 +76,18 @@
 
 
 #+END_SRC
-
 ** Widen keybinding
 #+BEGIN_SRC emacs-lisp
 (map! :map outline-mode-map
       :n "zw" #'widen)
 #+END_SRC
-
+** org-habit
+#+BEGIN_SRC emacs-lisp
+(after! org
+  :init
+  (add-to-list 'org-modules 'org-habit t)
+  )
+#+END_SRC
 ** super-agenda
 #+BEGIN_SRC emacs-lisp
 (def-package! org-super-agenda
@@ -112,12 +111,18 @@
   :config
   (org-super-agenda-mode))
 #+END_SRC
-
+** org-journal
+#+BEGIN_SRC emacs-lisp
+(after! org
+  :init
+  (add-to-list 'org-modules 'org-journal t)
+  :config
+  (setq org-journal-dir "/Users/raulmp/Library/Mobile Documents/com~apple~CloudDocs/Badis/org/ownjournal"))
+#+END_SRC
 * Other stuff
-
 ** Copy lines matching an expression
-  #+BEGIN_SRC emacs-lisp
- (defun copy-lines-matching-re (re)
+#+BEGIN_SRC emacs-lisp
+(defun copy-lines-matching-re (re)
   "find all lines matching the regexp RE in the current buffer
 putting the matching lines in a buffer named *matching*"
   (interactive "sRegexp to match: ")
@@ -132,10 +137,10 @@ putting the matching lines in a buffer named *matching*"
                                                  (line-beginning-position 2))
                  result-buffer))))
     (pop-to-buffer result-buffer)))
- #+END_SRC
+#+END_SRC
 
 ** Remove links, keep description
- #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (defun afs/org-replace-link-by-link-description ()
   "Replace an org link by its description or if empty its address"
   (interactive)
@@ -146,15 +151,4 @@ putting the matching lines in a buffer named *matching*"
                            (org-match-string-no-properties 1))))
         (apply 'delete-region remove)
         (insert description))))
- #+END_SRC
-
-** Cursors changes
- #+BEGIN_SRC emacs-lisp
- ;; (use-package evil-terminal-cursor-changer
- ;;   :init
- ;;   (progn
- ;;     (unless (display-graphic-p)
- ;;          (require 'evil-terminal-cursor-changer)
- ;;          (evil-terminal-cursor-changer-activate) ; or (etcc-on)
- ;;          )))
- #+END_SRC
+#+END_SRC
