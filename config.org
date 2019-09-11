@@ -93,6 +93,11 @@
       :n "gi" #'org-id-copy
       :n "ci" #'org-id-get-create)
 #+END_SRC
+** Change word
+#+BEGIN_SRC emacs-lisp
+(map! :map evil-org-mode-map
+      :n "c" #'evil-change)
+#+END_SRC
 ** org-habit
 #+BEGIN_SRC emacs-lisp
 (after! org
@@ -119,6 +124,8 @@
                                          :deadline today)
                                   (:name "Important"
                                          :priority "A")
+                                  (:name "Habits"
+                                         :tags "habit")
                                   (:name "Overdue"
                                          :deadline past)
                                   (:name "Due soon"
@@ -171,7 +178,7 @@ putting the matching lines in a buffer named *matching*"
         (insert description))))
 #+END_SRC
 * huspell
-** Set propertly
+** Set propertly :tangle no
 :PROPERTIES:
 :ID:       359E5C0A-0B6C-4948-AEFE-F909A4EC33D7
 :END:

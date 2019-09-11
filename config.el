@@ -62,6 +62,9 @@
       :n "gi" #'org-id-copy
       :n "ci" #'org-id-get-create)
 
+(map! :map evil-org-mode-map
+      :n "c" #'evil-change)
+
 (after! org
   :init
   (add-to-list 'org-modules 'org-habit t)
@@ -77,21 +80,21 @@
   :after org-agenda
   ;; before the package is loaded
   :init
-  ;; (setq org-super-agenda-groups '((:name "Today"
-  ;;                                        :time-grid t
-  ;;                                        :scheduled today)
-  ;;                                 (:name "Due today"
-  ;;                                        :deadline today)
-  ;;                                 (:name "Important"
-  ;;                                        :priority "A")
-  ;;                                 (:name "Habits"
-  ;;                                        :property "habit")
-  ;;                                 (:name "Overdue"
-  ;;                                        :deadline past)
-  ;;                                 (:name "Due soon"
-  ;;                                        :deadline future)
-  ;;                                 (:name "Big Outcomes"
-  ;;                                        :tag "bo")))
+  (setq org-super-agenda-groups '((:name "Today"
+                                         :time-grid t
+                                         :scheduled today)
+                                  (:name "Due today"
+                                         :deadline today)
+                                  (:name "Important"
+                                         :priority "A")
+                                  (:name "Habits"
+                                         :tags "habit")
+                                  (:name "Overdue"
+                                         :deadline past)
+                                  (:name "Due soon"
+                                         :deadline future)
+                                  (:name "Big Outcomes"
+                                         :tag "bo")))
   ;; after the package is loaded
   :config
   (org-super-agenda-mode))
