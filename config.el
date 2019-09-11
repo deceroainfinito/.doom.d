@@ -132,17 +132,29 @@ putting the matching lines in a buffer named *matching*"
         (apply 'delete-region remove)
         (insert description))))
 
-(defun hunspell/check-english
-            (interactive)
-            (ispell-change-dictionary "en_GB"))
-(defun hunspell/check-spanish
-            (interactive)
-            (ispell-change-dictionary "es_es"))
+(defun hunspell/check-english ()
+  "Checks english with hunspell"
+  (interactive)
+  (ispell-change-dictionary "en_US")
+  (flyspell-buffer))
+
+(defun hunspell/check-spanish ()
+  "Checks spanish with hunspell"
+  (interactive)
+  (ispell-change-dictionary "es_ANY")
+  (flyspell-buffer))
 
 (after! ispell
   :config
   (setq ispell-program-name (executable-find "hunspell")
-      ispell-dictionary "en_GB")
-  ;; (map! :map org-mode-map
-  ;;     :n "he" #'hunspell/check-spanish
-  ;;     :n "hi" #'hunspell/check-english))
+        ispell-dictionary "en_US")
+  (setq ispell-hunspell-dict-paths-alist
+        '(("en_US" "~/Library/Spelling/en_US.dic")
+          ("en_GB" "~/Library/Spelling/en_GB.dic")
+          ("es_ANY" "~/Library/Spelling/es_ANY.dic")))
+  (map! :map text-mode-map
+        :n "C-c s" #'hunspell/check-spanish
+        :n "C-c i" #'hunspell/check-english)
+  (map! :map org-mode-map
+        :n "-e" #'hunspell/check-spanish
+        :n "-i" #'hunspell/check-english))
