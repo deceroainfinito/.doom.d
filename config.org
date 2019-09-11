@@ -1,3 +1,10 @@
+* Own Info
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "deceroainfinito"
+      user-mail-address "raul@deceroainfinito.es"
+      epa-file-encrypt-to user-mail-address)
+#+END_SRC
+
 * Doom stuff
 ** Dashboard icon
 #+BEGIN_SRC emacs-lisp
@@ -28,7 +35,7 @@
   (doom-themes-org-config)
 
   :config
-  (load-theme 'doom-nord t))
+  (load-theme 'doom-one t))
 #+END_SRC
 
 * Mapping
@@ -59,9 +66,8 @@
 (after! org
   :config
   (setq org-link-frame-setup '((file . find-file-other-window)))
-  (setq org-todo-keywords '((sequence "TODO(t)" "|")
-                            (sequence "[!](i)" "[ ](E)" "[-](g)" "[?](q)" "|" "[X](D)")
-                            (sequence "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)")
+  (setq org-todo-keywords '((sequence "[!](i)" "[ ](E)" "[-](g)" "[?](q)" "|" "[X](x)")
+                            (sequence "TODO(t)" "NEXT(n)" "WAIT(w)" "HOLD(h)" "|" "ABRT(c)" "DONE(d)")
                             (sequence "[READY FOR REVIEW](W)"
                                       "[REVIEW FAILED](F)"
                                       "[READY FOR TESTING](T)"
@@ -72,7 +78,7 @@
                                       "[READY FOR PRODUCTION](P)"
                                       "|"
                                       "[MERGED](M)"
-                                      "[DONE](d)"))))
+                                      "[DONE](D)"))))
 
 
 #+END_SRC
@@ -81,13 +87,25 @@
 (map! :map outline-mode-map
       :n "zw" #'widen)
 #+END_SRC
+** Id keybinding
+#+BEGIN_SRC emacs-lisp
+(map! :map org-mode-map
+      :n "gi" #'org-id-copy
+      :n "ci" #'org-id-get-create)
+#+END_SRC
 ** org-habit
 #+BEGIN_SRC emacs-lisp
 (after! org
   :init
   (add-to-list 'org-modules 'org-habit t)
-  )
-#+END_SRC
+  :config
+  (setq org-agenda-files (list "~/ownbujo" "~/badibujo/"))
+  (setq org-habit-show-all-today t)
+  (unless (string-match-p "\\.gpg" org-agenda-file-regexp)
+    (setq org-agenda-file-regexp
+          (replace-regexp-in-string "\\\\\\.org" "\\\\.org\\\\(\\\\.gpg\\\\)?"
+                                    org-agenda-file-regexp))))
+  #+END_SRC
 ** super-agenda
 #+BEGIN_SRC emacs-lisp
 (def-package! org-super-agenda
@@ -151,4 +169,26 @@ putting the matching lines in a buffer named *matching*"
                            (org-match-string-no-properties 1))))
         (apply 'delete-region remove)
         (insert description))))
+#+END_SRC
+* huspell
+** Set propertly
+:PROPERTIES:
+:ID:       359E5C0A-0B6C-4948-AEFE-F909A4EC33D7
+:END:
+#+BEGIN_SRC emacs-lisp
+(defun hunspell/check-english
+            (interactive)
+            (ispell-change-dictionary "en_GB"))
+(defun hunspell/check-spanish
+            (interactive)
+            (ispell-change-dictionary "es_es"))
+
+(after! ispell
+  :config
+  (setq ispell-program-name (executable-find "hunspell")
+      ispell-dictionary "en_GB")
+  ;; (map! :map org-mode-map
+  ;;     :n "he" #'hunspell/check-spanish
+  ;;     :n "hi" #'hunspell/check-english))
+
 #+END_SRC
