@@ -8,3 +8,4 @@
 (package! org-super-agenda)
 (package! doom-themes)
 (package! org-journal)
+(package! org-gcal)

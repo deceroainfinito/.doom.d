@@ -2,6 +2,11 @@
       user-mail-address "raul@deceroainfinito.es"
       epa-file-encrypt-to user-mail-address)
 
+(require 'epa-file)
+(epa-file-enable)
+(setq secrests-file (expand-file-name "secrets.el.gpg" doom-private-dir))
+(load secrests-file)
+
 (setq
  +doom-dashboard-banner-file (expand-file-name "red_dice_logo.png" doom-private-dir))
 
@@ -38,6 +43,10 @@
 
 (map! :leader :g "a" #'projectile-ag)
 
+(map! :map global-map
+      :n "-," #'next-buffer
+      :n "-." #'previous-buffer)
+
 (after! org
   :config
   (setq org-link-frame-setup '((file . find-file-other-window)))
@@ -59,8 +68,8 @@
       :n "zw" #'widen)
 
 (map! :map org-mode-map
-      :n "gi" #'org-id-copy
-      :n "ci" #'org-id-get-create)
+      :n "-y" #'org-id-copy
+      :n "-c" #'org-id-get-create)
 
 (map! :map evil-org-mode-map
       :n "c" #'evil-change)
@@ -80,21 +89,10 @@
   :after org-agenda
   ;; before the package is loaded
   :init
-  (setq org-super-agenda-groups '((:name "Today"
-                                         :time-grid t
-                                         :scheduled today)
-                                  (:name "Due today"
-                                         :deadline today)
-                                  (:name "Important"
-                                         :priority "A")
-                                  (:name "Habits"
-                                         :tags "habit")
-                                  (:name "Overdue"
-                                         :deadline past)
-                                  (:name "Due soon"
+  (setq org-super-agenda-groups '((:name "Deadline"
                                          :deadline future)
-                                  (:name "Big Outcomes"
-                                         :tag "bo")))
+                                  (:name "Habits"
+                                         :habit t)))
   ;; after the package is loaded
   :config
   (org-super-agenda-mode))
@@ -103,7 +101,13 @@
   :init
   (add-to-list 'org-modules 'org-journal t)
   :config
-  (setq org-journal-dir "/Users/raulmp/Library/Mobile Documents/com~apple~CloudDocs/Badis/org/ownjournal"))
+  (setq org-journal-dir +own/journal-dir))
+
+(def-package! org-gcal
+  :after org
+  :init
+  (+own/set-gcal))
+  ;; (define-calendar))
 
 (defun copy-lines-matching-re (re)
   "find all lines matching the regexp RE in the current buffer

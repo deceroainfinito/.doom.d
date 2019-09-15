@@ -5,6 +5,22 @@
       epa-file-encrypt-to user-mail-address)
 #+END_SRC
 
+* Encryption
+
+#+BEGIN_SRC emacs-lisp
+(require 'epa-file)
+(epa-file-enable)
+(setq secrests-file (expand-file-name "secrets.el.gpg" doom-private-dir))
+(load secrests-file)
+#+END_SRC
+
+** Another option would had been. `load!` loads on current path.
+#+BEGIN_SRC emacs-lisp :tangle no
+(require 'epa-file)
+(epa-file-enable)
+(load! "secrets.el.gpg")
+#+END_SRC
+
 * Doom stuff
 ** Dashboard icon
 #+BEGIN_SRC emacs-lisp
@@ -60,6 +76,12 @@
 #+BEGIN_SRC emacs-lisp
 (map! :leader :g "a" #'projectile-ag)
 #+END_SRC
+** Buffer forward and backwards
+#+BEGIN_SRC emacs-lisp
+(map! :map global-map
+      :n "-," #'next-buffer
+      :n "-." #'previous-buffer)
+#+END_SRC
 * Org stuff
 ** TODO-keywords
 #+BEGIN_SRC emacs-lisp
@@ -90,8 +112,8 @@
 ** Id keybinding
 #+BEGIN_SRC emacs-lisp
 (map! :map org-mode-map
-      :n "gi" #'org-id-copy
-      :n "ci" #'org-id-get-create)
+      :n "-y" #'org-id-copy
+      :n "-c" #'org-id-get-create)
 #+END_SRC
 ** Change word
 #+BEGIN_SRC emacs-lisp
@@ -110,31 +132,21 @@
     (setq org-agenda-file-regexp
           (replace-regexp-in-string "\\\\\\.org" "\\\\.org\\\\(\\\\.gpg\\\\)?"
                                     org-agenda-file-regexp))))
-  #+END_SRC
+#+END_SRC
 ** super-agenda
 #+BEGIN_SRC emacs-lisp
 (def-package! org-super-agenda
   :after org-agenda
   ;; before the package is loaded
   :init
-  (setq org-super-agenda-groups '((:name "Today"
-                                         :time-grid t
-                                         :scheduled today)
-                                  (:name "Due today"
-                                         :deadline today)
-                                  (:name "Important"
-                                         :priority "A")
-                                  (:name "Habits"
-                                         :tags "habit")
-                                  (:name "Overdue"
-                                         :deadline past)
-                                  (:name "Due soon"
+  (setq org-super-agenda-groups '((:name "Deadline"
                                          :deadline future)
-                                  (:name "Big Outcomes"
-                                         :tag "bo")))
+                                  (:name "Habits"
+                                         :habit t)))
   ;; after the package is loaded
   :config
   (org-super-agenda-mode))
+
 #+END_SRC
 ** org-journal
 #+BEGIN_SRC emacs-lisp
@@ -142,7 +154,15 @@
   :init
   (add-to-list 'org-modules 'org-journal t)
   :config
-  (setq org-journal-dir "/Users/raulmp/Library/Mobile Documents/com~apple~CloudDocs/Badis/org/ownjournal"))
+  (setq org-journal-dir +own/journal-dir))
+#+END_SRC
+** org-gcal
+#+BEGIN_SRC emacs-lisp
+(def-package! org-gcal
+  :after org
+  :init
+  (+own/set-gcal))
+  ;; (define-calendar))
 #+END_SRC
 * Other stuff
 ** Copy lines matching an expression
@@ -209,4 +229,4 @@ putting the matching lines in a buffer named *matching*"
   (map! :map org-mode-map
         :n "-e" #'hunspell/check-spanish
         :n "-i" #'hunspell/check-english))
-  #+END_SRC
+#+END_SRC
