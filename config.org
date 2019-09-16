@@ -163,7 +163,6 @@
   :after org
   :init
   (+own/set-gcal))
-  ;; (define-calendar))
 #+END_SRC
 * Other stuff
 ** Copy lines matching an expression

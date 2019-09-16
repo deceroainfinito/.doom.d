@@ -109,7 +109,6 @@
   :after org
   :init
   (+own/set-gcal))
-  ;; (define-calendar))
 
 (defun copy-lines-matching-re (re)
   "find all lines matching the regexp RE in the current buffer
