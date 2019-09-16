@@ -141,12 +141,13 @@
   :init
   (setq org-super-agenda-groups '((:name "Deadline"
                                          :deadline future)
+                                  (:name "Today"
+                                         :time-grid t)
                                   (:name "Habits"
                                          :habit t)))
   ;; after the package is loaded
   :config
   (org-super-agenda-mode))
-
 #+END_SRC
 ** org-journal
 #+BEGIN_SRC emacs-lisp

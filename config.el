@@ -91,6 +91,8 @@
   :init
   (setq org-super-agenda-groups '((:name "Deadline"
                                          :deadline future)
+                                  (:name "Today"
+                                         :time-grid t)
                                   (:name "Habits"
                                          :habit t)))
   ;; after the package is loaded
