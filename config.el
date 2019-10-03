@@ -58,6 +58,7 @@
                                       "[URGENT](G)"
                                       "[TESTING FAILED](A)"
                                       "[DO NOT MERGE](N)"
+                                      "[QA PASS](S)"
                                       "[QA NOT REQUIRED](Q)"
                                       "[READY FOR PRODUCTION](P)"
                                       "|"
@@ -89,8 +90,28 @@
   :after org-agenda
   ;; before the package is loaded
   :init
+
+  ;; (setq org-agenda-custom-commands
+  ;;       '(("c" "Super Agenda" agenda
+  ;;          (org-super-agenda-mode)
+  ;;          ((org-super-agenda-groups
+  ;;            '(
+  ;;              (:name "Deadline"
+  ;;                     :deadline future)
+  ;;              (:name "Near Scheduled"
+  ;;                     :scheduled future
+  ;;                     :time-grid t)
+  ;;              (:name "Today"
+  ;;                     :time-grid t)
+  ;;              (:name "Habits"
+  ;;                     :habit t)))
+  ;;           (org-agenda nil "a")))))
+
   (setq org-super-agenda-groups '((:name "Deadline"
                                          :deadline future)
+                                  (:name "Near Scheduled"
+                                         :scheduled future
+                                         :time-grid t)
                                   (:name "Today"
                                          :time-grid t)
                                   (:name "Habits"
@@ -109,6 +130,10 @@
   :after org
   :init
   (+own/set-gcal))
+
+(after! org
+  :config
+  (setq org-hierarchical-todo-statistics nil))
 
 (defun copy-lines-matching-re (re)
   "find all lines matching the regexp RE in the current buffer
@@ -163,3 +188,8 @@ putting the matching lines in a buffer named *matching*"
   (map! :map org-mode-map
         :n "-e" #'hunspell/check-spanish
         :n "-i" #'hunspell/check-english))
+
+(add-to-list 'load-path (expand-file-name "packages/spotify" doom-private-dir))
+(require 'spotify)
+(+secret/set-spotify)
+(global-spotify-remote-mode)
