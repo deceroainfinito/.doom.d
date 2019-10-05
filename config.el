@@ -192,4 +192,6 @@ putting the matching lines in a buffer named *matching*"
 (add-to-list 'load-path (expand-file-name "packages/spotify" doom-private-dir))
 (require 'spotify)
 (+secret/set-spotify)
+(setq spotify-mode-line-refresh-interval 1)
 (global-spotify-remote-mode)
+(setq spotify-transport 'connect)
