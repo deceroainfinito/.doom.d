@@ -62,6 +62,8 @@
                                       "[QA PASS](S)"
                                       "[QA NOT REQUIRED](Q)"
                                       "[READY FOR PRODUCTION](P)"
+                                      "[PROOF OF CONCEPT](C)"
+                                      "[CODE REVIEWED](V)"
                                       "|"
                                       "[MERGED](M)"
                                       "[DONE](D)"))))
