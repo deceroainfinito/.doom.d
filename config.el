@@ -190,9 +190,10 @@ putting the matching lines in a buffer named *matching*"
         :n "-e" #'hunspell/check-spanish
         :n "-i" #'hunspell/check-english))
 
-;;(add-to-list 'load-path (expand-file-name "packages/spotify" doom-private-dir))
-;;(require 'spotify)
-;;(+secret/set-spotify)
-;;(setq spotify-mode-line-refresh-interval 1)
-;;(global-spotify-remote-mode)
-;;(setq spotify-transport 'connect)
+;; (add-to-list 'load-path (expand-file-name "vendor/spotify" doom-private-dir))
+;; (require 'spotify)
+;; (+secret/set-spotify)
+;; ;; (setq spotify-mode-line-refresh-interval 1)
+;; ;; (global-spotify-remote-mode)
+;; ;; (define-key spotify-mode-map (kbd "C-c .") 'spotify-command-map)
+;; (setq spotify-transport 'connect)
