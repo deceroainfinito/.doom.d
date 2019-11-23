@@ -17,6 +17,7 @@
 (def-package! doom-themes
   :init
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-line-numbers-style 'relative ;; use relative line numbers
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
