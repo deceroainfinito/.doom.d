@@ -11,8 +11,8 @@
  +doom-dashboard-banner-file (expand-file-name "red_dice_logo.png" doom-private-dir))
 
 (setq
- doom-font (font-spec :family "Fira Code" :size 14)
- doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18))
+ doom-font (font-spec :family "Monaco" :size 14)
+ doom-variable-pitch-font (font-spec :family "Hack" :size 18))
 
 (def-package! doom-themes
   :init
@@ -192,10 +192,9 @@ putting the matching lines in a buffer named *matching*"
         :n "-e" #'hunspell/check-spanish
         :n "-i" #'hunspell/check-english))
 
-;; (add-to-list 'load-path (expand-file-name "vendor/spotify" doom-private-dir))
+;; (add-to-list 'load-path (expand-file-name "packages/spotify" doom-private-dir))
 ;; (require 'spotify)
 ;; (+secret/set-spotify)
-;; ;; (setq spotify-mode-line-refresh-interval 1)
-;; ;; (global-spotify-remote-mode)
-;; ;; (define-key spotify-mode-map (kbd "C-c .") 'spotify-command-map)
+;; (setq spotify-mode-line-refresh-interval 1)
+;; (global-spotify-remote-mode)
 ;; (setq spotify-transport 'connect)

@@ -31,8 +31,8 @@
 ** Font Management
 #+BEGIN_SRC emacs-lisp
 (setq
- doom-font (font-spec :family "Fira Code" :size 14)
- doom-variable-pitch-font (font-spec :family "SF Pro Display" :size 18))
+ doom-font (font-spec :family "Monaco" :size 14)
+ doom-variable-pitch-font (font-spec :family "Hack" :size 18))
 #+END_SRC
 
 ** Theming
@@ -263,11 +263,10 @@ putting the matching lines in a buffer named *matching*"
 * Spotify
 ** No Melpa for this package
 #+BEGIN_SRC emacs-lisp
-;; (add-to-list 'load-path (expand-file-name "vendor/spotify" doom-private-dir))
+;; (add-to-list 'load-path (expand-file-name "packages/spotify" doom-private-dir))
 ;; (require 'spotify)
 ;; (+secret/set-spotify)
-;; ;; (setq spotify-mode-line-refresh-interval 1)
-;; ;; (global-spotify-remote-mode)
-;; ;; (define-key spotify-mode-map (kbd "C-c .") 'spotify-command-map)
+;; (setq spotify-mode-line-refresh-interval 1)
+;; (global-spotify-remote-mode)
 ;; (setq spotify-transport 'connect)
 #+END_SRC
