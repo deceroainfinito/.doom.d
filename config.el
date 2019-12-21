@@ -198,3 +198,12 @@ putting the matching lines in a buffer named *matching*"
 ;; (setq spotify-mode-line-refresh-interval 1)
 ;; (global-spotify-remote-mode)
 ;; (setq spotify-transport 'connect)
+
+(def-package! lsp-sourcekit
+  :after lsp-mode
+  :config
+  (setenv "SOURCEKIT_TOOLCHAIN_PATH" "/Library/Developer/Toolchains/swift-latest.xctoolchain/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain")
+  (setq lsp-sourcekit-executable (expand-file-name "/Users/raul/Development/sourcekit-lsp-master/.build/x86_64-apple-macosx/debug/sourcekit-lsp")))
+
+(use-package swift-mode
+  :hook (swift-mode . (lambda () (lsp))))

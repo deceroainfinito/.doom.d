@@ -9,3 +9,6 @@
 (package! doom-themes)
 (package! org-journal)
 (package! org-gcal)
+(package! lsp-sourcekit)
+(package! company-lsp)
+(package! company-sourcekit)
