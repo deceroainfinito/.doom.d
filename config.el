@@ -31,6 +31,8 @@
   :config
   (load-theme 'doom-one t))
 
+(map! :ne "s-k" (λ! (kill-this-buffer)))
+
 (map! :ne "M-=" (λ! (text-scale-set 0))
       :ne "M-+" #'text-scale-increase
       :ne "M--" #'text-scale-decrease)
