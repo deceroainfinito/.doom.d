@@ -206,4 +206,10 @@ putting the matching lines in a buffer named *matching*"
   (setq lsp-sourcekit-executable (expand-file-name "/Users/raul/Development/sourcekit-lsp-master/.build/x86_64-apple-macosx/debug/sourcekit-lsp")))
 
 (use-package swift-mode
-  :hook (swift-mode . (lambda () (lsp))))
+  :hook (swift-mode . (lambda () (lsp-mode))))
+
+(add-hook 'swift-mode-hook
+          (lambda ()
+            (setq-local tab-width 2)
+            (defvar swift-indent-offset)
+            (setq-local swift-indent-offset 2)))
