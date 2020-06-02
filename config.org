@@ -56,6 +56,10 @@
 #+END_SRC
 
 * Mapping
+** Kill this buffer
+#+BEGIN_SRC emacs-lisp
+(map! :ne "s-k" (λ! (kill-this-buffer)))
+#+END_SRC
 ** Font sizing
 #+BEGIN_SRC emacs-lisp
 (map! :ne "M-=" (λ! (text-scale-set 0))
